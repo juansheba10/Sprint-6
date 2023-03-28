@@ -1,9 +1,25 @@
 import React from 'react';
+import { Modal, NavigationButtons, NavigationButton } from './EscenaStyles';
 
-function Escena() {
-    return (
-      <p>Nuestro héroe estaba flotando por el espacio sideral cuando a lo lejos divisó una nave espacial</p>
-    );
-  }
+const Escena = ({ historias, activeLine, handlePrev, handleNext }) => {
+  return (
+    <div>
+      <NavigationButtons>
+        <NavigationButton onClick={handlePrev} disabled={activeLine === 0}>
+          Retrocedir
+        </NavigationButton>
+        <NavigationButton onClick={handleNext} disabled={activeLine === historias.length - 1}>
+          Avançar
+        </NavigationButton>
+      </NavigationButtons>
+      {historias.map((historiaData, index) => (
+        <Modal key={index} active={index === activeLine}>
+          <p>{historiaData.txt}</p>
+        </Modal>
+      ))}
+    </div>
+  );
+};
 
 export default Escena;
+
